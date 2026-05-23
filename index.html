@@ -3,7 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Prompt Engineering — MIT Study Guide</title>
+
+<title>Advanced Prompt Engineering — Complete Study Guide (2025)</title>
+<meta name="description" content="Master advanced prompt engineering techniques — Zero-Shot, Few-Shot, Chain-of-Thought, Auto-CoT, Self-Consistency, Tree of Thoughts, ReAct, Meta Prompting, DSP, and Prompt Chaining. 11 chapters with flow diagrams, pseudocode, and real-world examples.">
+<meta name="keywords" content="prompt engineering, LLM, chain of thought, few shot prompting, zero shot, ReAct, tree of thoughts, self consistency, meta prompting, directional stimulus prompting, DSP, prompt chaining, auto-CoT, large language models, GPT, Claude, AI, machine learning">
+<meta name="author" content="Advanced Prompt Engineering Study Guide">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://your-username.github.io/prompt-engineering-guide/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advanced Prompt Engineering — Complete Study Guide (2025)">
+<meta property="og:description" content="11 chapters covering every major prompting technique — from Zero-Shot to Prompt Chaining — with flow diagrams, pseudocode, and real-world examples. Free &amp; open.">
+<meta property="og:image" content="https://your-username.github.io/prompt-engineering-guide/og-image.png">
+<meta property="og:url" content="https://your-username.github.io/prompt-engineering-guide/">
+<meta property="og:site_name" content="Prompt Engineering Study Guide">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Advanced Prompt Engineering — Complete Study Guide (2025)">
+<meta name="twitter:description" content="11 chapters. Zero jargon. Every technique explained story-first with flow diagrams and pseudocode.">
+<meta name="twitter:image" content="https://your-username.github.io/prompt-engineering-guide/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Advanced Prompt Engineering — Complete Study Guide",
+  "description": "Master advanced prompt engineering techniques including Chain-of-Thought, ReAct, Tree of Thoughts, Meta Prompting, DSP, and Prompt Chaining with flow diagrams and pseudocode.",
+  "author": { "@type": "Person", "name": "Prompt Engineering Study Guide" },
+  "datePublished": "2025-05-23",
+  "keywords": "prompt engineering, LLM, chain of thought, ReAct, few shot, meta prompting",
+  "inLanguage": "en"
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -72,14 +103,37 @@ hr.sep { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
 .mc p { font-size: 0.82rem; color: #475569; line-height: 1.6; }
 
 @media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } .grid2 { grid-template-columns: 1fr; } }
+
+/* ── Temperature Interactive ── */
+.icard { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 12px; }
+.icard-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.formula-box { background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 14px; }
+.formula-box .f-title { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1e40af; margin-bottom: 6px; }
+.formula-box .f-eq { font-size: 1rem; font-weight: 500; color: #1e3a8a; margin-bottom: 5px; }
+.formula-box .f-desc { font-size: 0.8rem; color: #3b82f6; }
+.calc-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.calc-table th { text-align: left; font-weight: 500; color: var(--muted); font-size: 0.75rem; padding: 5px 8px; border-bottom: 1px solid var(--border); }
+.calc-table td { padding: 6px 8px; border-bottom: 0.5px solid var(--border); }
+.calc-table td:not(:first-child) { text-align: right; font-family: 'DM Mono', monospace; font-size: 0.8rem; }
+.calc-table tfoot td { font-weight: 600; border-top: 1px solid var(--border); border-bottom: none; }
+.bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.bar-tok { width: 58px; font-size: 0.78rem; font-weight: 500; color: var(--muted); text-align: right; flex-shrink: 0; font-family: 'DM Mono', monospace; }
+.bar-track { flex: 1; height: 24px; background: #f1f5f9; border-radius: 5px; overflow: hidden; border: 0.5px solid var(--border); }
+.bar-fill { height: 100%; border-radius: 5px; transition: width 0.35s ease; display: flex; align-items: center; padding-left: 8px; }
+.bar-fill span { font-size: 0.75rem; font-weight: 600; color: white; white-space: nowrap; }
+.t-quick { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.t-quick button { font-size: 0.76rem; padding: 4px 14px; border-radius: 999px; border: 1px solid var(--border); background: #f8fafc; color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+.t-quick button:hover { background: #e0e7ff; border-color: #818cf8; }
+.t-quick button.t-active { background: #1d4ed8; color: white; border-color: #1d4ed8; }
+.entropy-pill { display: inline-block; font-size: 0.85rem; font-weight: 600; padding: 5px 16px; border-radius: 999px; transition: all 0.3s; }
+.t-insight { font-size: 0.85rem; color: #1e293b; line-height: 1.7; padding: 0.75rem 1rem; border-radius: 8px; background: #f8fafc; border: 1px solid var(--border); margin-top: 10px; }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="hero-eye">IIT Kharagpur · Pre-read Study Guide</div>
   <h1>Advanced Prompt Engineering</h1>
-  <p>8 chapters. Zero jargon first. Every concept explained from a real-world story to under-the-hood mechanics — with flow diagrams.</p>
+  <p>11 chapters. Zero jargon first. Every concept explained from a real-world story to under-the-hood mechanics — with flow diagrams.</p>
 </div>
 
 <nav class="nav" id="nav">
@@ -91,6 +145,9 @@ hr.sep { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
   <button class="nb" onclick="scrollTo('ch6')">6. Self-Consistency</button>
   <button class="nb" onclick="scrollTo('ch7')">7. Tree of Thoughts</button>
   <button class="nb" onclick="scrollTo('ch8')">8. ReAct</button>
+  <button class="nb" onclick="scrollTo('ch9')">9. Meta Prompting</button>
+  <button class="nb" onclick="scrollTo('ch10')">10. DSP</button>
+  <button class="nb" onclick="scrollTo('ch11')">11. Prompt Chaining</button>
 </nav>
 
 <div class="main">
@@ -382,6 +439,141 @@ Let's think step by step."""</span>
     <div class="ilab">💡 Key insight</div>
     <p>Chain-of-Thought only works in <strong>large models (100B+ parameters)</strong>. Small models don't benefit. This is called an "emergent ability" — it appears suddenly at scale, like a phase transition. For everyday tasks, just add "Let's think step by step" to your prompt.</p>
   </div>
+
+  <!-- ★ AUTO-CoT (from IIT KGP slide) ★ -->
+  <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px dashed var(--border)">
+    <div class="ch-num" style="margin-bottom:0.4rem">Chapter 4 — Variant (Zhang et al., 2023 · arXiv:2210.03493)</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:0.3rem;color:var(--text)">Automatic CoT (Auto-CoT)</h3>
+    <div class="ch-sub" style="margin-bottom:1.25rem">The problem with Few-Shot CoT: someone has to write those examples manually. Auto-CoT removes that human effort entirely — it <em>generates its own examples automatically</em>.</div>
+
+    <div class="story">
+      <div class="slab">🏫 Story first</div>
+      <p>Imagine you're a teacher preparing exam questions. You have 100 student questions. You don't read all 100 — you group similar ones together (clustering), pick one representative question from each group, solve it step-by-step yourself, and use those solved examples in tomorrow's lesson. Auto-CoT does exactly this — but fully automatically, using the LLM to do the grouping and the solving.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.5rem;overflow-x:auto">
+      <div class="dlab">Flow diagram — 2-phase Auto-CoT pipeline (from the IIT KGP slide)</div>
+      <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="aac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="aacg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M1 1L9 5L1 9" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- PHASE 1 LABEL -->
+        <rect x="20" y="10" width="295" height="26" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="0.75"/>
+        <text x="167" y="25" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">Phase 1 — Question Clustering</text>
+
+        <!-- PHASE 2 LABEL -->
+        <rect x="365" y="10" width="295" height="26" rx="6" fill="#ccfbf1" stroke="#0f766e" stroke-width="0.75"/>
+        <text x="512" y="25" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#064e3b">Phase 2 — Demonstration Sampling</text>
+
+        <!-- Input: question bank -->
+        <rect x="20" y="54" width="295" height="52" rx="8" fill="#dbeafe" stroke="#1e40af" stroke-width="0.75"/>
+        <text x="167" y="73" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#1e3a8a">Question bank (unlabelled)</text>
+        <text x="167" y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#3b82f6">Q1, Q2, Q3 … Qn — all raw questions</text>
+        <line x1="167" y1="108" x2="167" y2="138" stroke="#475569" stroke-width="1.5" marker-end="url(#aac)"/>
+
+        <!-- Embed + cluster -->
+        <rect x="20" y="140" width="295" height="52" rx="8" fill="#ede9fe" stroke="#5b21b6" stroke-width="0.75"/>
+        <text x="167" y="159" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#4c1d95">Embed → cluster into k groups</text>
+        <text x="167" y="179" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#7c3aed">Each cluster = questions that are similar in meaning</text>
+        <line x1="167" y1="194" x2="167" y2="224" stroke="#475569" stroke-width="1.5" marker-end="url(#aac)"/>
+
+        <!-- k clusters (visual) -->
+        <rect x="20" y="226" width="295" height="90" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.75"/>
+        <!-- Cluster 1 circles -->
+        <circle cx="72" cy="271" r="22" fill="#fde68a" stroke="#b45309" stroke-width="0.75"/>
+        <circle cx="56" cy="256" r="13" fill="#fef3c7" stroke="#b45309" stroke-width="0.5" opacity="0.8"/>
+        <circle cx="90" cy="258" r="10" fill="#fef3c7" stroke="#b45309" stroke-width="0.5" opacity="0.7"/>
+        <circle cx="60" cy="287" r="11" fill="#fef3c7" stroke="#b45309" stroke-width="0.5" opacity="0.7"/>
+        <text x="72" y="275" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#78350f">1</text>
+        <text x="72" y="308" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#64748b">cluster 1</text>
+        <!-- dots -->
+        <text x="148" y="272" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="18" fill="#94a3b8">…</text>
+        <!-- Cluster k circles -->
+        <circle cx="224" cy="271" r="22" fill="#fda4af" stroke="#9f1239" stroke-width="0.75"/>
+        <circle cx="208" cy="256" r="13" fill="#ffe4e6" stroke="#9f1239" stroke-width="0.5" opacity="0.8"/>
+        <circle cx="242" cy="260" r="10" fill="#ffe4e6" stroke="#9f1239" stroke-width="0.5" opacity="0.7"/>
+        <circle cx="212" cy="286" r="11" fill="#ffe4e6" stroke="#9f1239" stroke-width="0.5" opacity="0.7"/>
+        <text x="224" y="275" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#881337">k</text>
+        <text x="224" y="308" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#64748b">cluster k</text>
+
+        <!-- Arrow Phase 1 → Phase 2 (horizontal) -->
+        <line x1="317" y1="271" x2="363" y2="271" stroke="#475569" stroke-width="1.5" marker-end="url(#aac)" stroke-dasharray="5 3"/>
+        <text x="340" y="263" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#64748b">pick 1 per cluster</text>
+
+        <!-- Phase 2: Representative questions -->
+        <rect x="365" y="54" width="295" height="52" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="0.75"/>
+        <text x="512" y="73" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#78350f">Pick 1 representative per cluster</text>
+        <text x="512" y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#d97706">Chosen by selection criteria (centroid nearest)</text>
+        <line x1="512" y1="108" x2="512" y2="138" stroke="#475569" stroke-width="1.5" marker-end="url(#aac)"/>
+
+        <!-- Zero-Shot CoT applied -->
+        <rect x="365" y="140" width="295" height="52" rx="8" fill="#ede9fe" stroke="#5b21b6" stroke-width="0.75"/>
+        <text x="512" y="159" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#4c1d95">Apply Zero-Shot CoT to each</text>
+        <text x="512" y="179" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#7c3aed">Append "Let's think step by step." → LLM generates chain</text>
+        <line x1="512" y1="194" x2="512" y2="224" stroke="#475569" stroke-width="1.5" marker-end="url(#aac)"/>
+
+        <!-- Output: k demonstrations -->
+        <rect x="365" y="226" width="295" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="0.75"/>
+        <text x="512" y="248" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#14532d">k auto-generated demonstrations</text>
+        <!-- Demo 1 -->
+        <rect x="378" y="258" width="270" height="22" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="0.5"/>
+        <text x="513" y="271" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#14532d">Q: While shopping for music online … A: Let's …</text>
+        <!-- Demo k -->
+        <rect x="378" y="286" width="270" height="22" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="0.5"/>
+        <text x="513" y="299" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#14532d">Q: A chef needs to cook 9 potatoes … A: Let's …</text>
+        <line x1="512" y1="318" x2="512" y2="348" stroke="#0f766e" stroke-width="1.5" marker-end="url(#aacg)"/>
+
+        <!-- Final output -->
+        <rect x="365" y="350" width="295" height="52" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1"/>
+        <text x="512" y="369" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#064e3b">Final prompt = k demos + new question</text>
+        <text x="512" y="389" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#0f766e">✅ Few-Shot CoT — built fully automatically</text>
+      </svg>
+    </div>
+
+    <h3 class="sh">How it works under the hood</h3>
+    <p class="body">Regular Few-Shot CoT needs a human to write 2–5 high-quality reasoning chains. That is expensive, slow, and biased. Auto-CoT (Zhang et al., 2023) automates this in two phases:</p>
+    <div class="grid2" style="margin-bottom:1rem">
+      <div class="mc" style="border-left:3px solid #7c3aed;border-radius:0 8px 8px 0">
+        <h4>Phase 1 — Clustering</h4>
+        <p>All questions are converted to embeddings (vector representations). Then k-means clustering groups similar questions together. Each cluster = one type of reasoning problem.</p>
+      </div>
+      <div class="mc" style="border-left:3px solid #0f766e;border-radius:0 8px 8px 0">
+        <h4>Phase 2 — Sampling</h4>
+        <p>One representative question is picked from each cluster (the one closest to the centroid). Zero-Shot CoT ("Let's think step by step") is applied to generate its reasoning chain automatically.</p>
+      </div>
+    </div>
+    <p class="body">The result: k question+reasoning-chain pairs, built with <strong>zero human labelling effort</strong>. These become the few-shot examples for the final prompt.</p>
+
+    <div class="code"><span class="cm"># Auto-CoT — pseudocode</span>
+<span class="cm"># Phase 1: Cluster all questions</span>
+embeddings = embed_model.encode(all_questions)
+clusters   = kmeans(embeddings, k=8)
+
+<span class="cm"># Phase 2: Sample + auto-generate reasoning</span>
+demonstrations = []
+<span class="kw">for</span> cluster <span class="kw">in</span> clusters:
+    rep_q   = pick_centroid(cluster)           <span class="cm"># nearest to cluster center</span>
+    zs_cot  = rep_q + <span class="str">"\nLet's think step by step."</span>
+    chain   = llm.generate(zs_cot)             <span class="cm"># auto-generates reasoning</span>
+    demonstrations.append((rep_q, chain))
+
+<span class="cm"># Final prompt = all demos + new question</span>
+final_prompt = format_few_shot(demonstrations) + new_question
+answer = llm.generate(final_prompt)</div>
+
+    <div class="ins ins-t">
+      <div class="ilab">💡 Key insight</div>
+      <p>Auto-CoT beats hand-crafted Few-Shot CoT on most benchmarks. The key insight: <strong>diversity of examples matters more than quality of individual examples</strong>. By clustering, you guarantee each demo covers a different type of reasoning — much better than a human picking examples with unconscious bias.</p>
+    </div>
+  </div>
+  <!-- end Auto-CoT -->
+
 </section>
 
 <hr class="sep">
@@ -398,6 +590,65 @@ Let's think step by step."""</span>
     <div class="slab">🎰 Story first</div>
     <p>Imagine the LLM is spinning a roulette wheel after each word. Each possible next word has a slot on the wheel. More likely words get bigger slots. <strong>Temperature</strong> controls whether that wheel is tiny and precise (low temp = always picks the obvious word) or huge and wobbly (high temp = more creative, surprising picks). <strong>Top-K</strong> removes all slots except the top K candidates. <strong>Top-P</strong> removes slots until the remaining ones sum to P% of the probability. These knobs are your creative control.</p>
   </div>
+
+  <!-- ★ LIVE INTERACTIVE: Temperature Calculator (from IIT KGP slide) ★ -->
+  <div style="margin-bottom:1.75rem">
+    <div class="formula-box">
+      <div class="f-title">Formula from the IIT KGP slide</div>
+      <div class="f-eq">P(token<sub>i</sub>) = exp(z<sub>i</sub> / T) &nbsp;÷&nbsp; Σ<sub>j</sub> exp(z<sub>j</sub> / T)</div>
+      <div class="f-desc">z<sub>i</sub> = raw logit score &nbsp;·&nbsp; T = temperature &nbsp;·&nbsp; exp = e raised to power x</div>
+    </div>
+
+    <div class="icard">
+      <div class="icard-label">Input logits (from the slide — fixed)</div>
+      <table class="calc-table">
+        <thead><tr><th>Token</th><th>Logit z</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr><td style="font-family:'DM Mono',monospace">"cat"</td><td>4.0</td><td style="color:var(--muted);font-family:'DM Sans',sans-serif">LLM thinks most likely</td></tr>
+          <tr><td style="font-family:'DM Mono',monospace">"dog"</td><td>2.0</td><td style="color:var(--muted);font-family:'DM Sans',sans-serif">Second candidate</td></tr>
+          <tr><td style="font-family:'DM Mono',monospace">"fish"</td><td>1.0</td><td style="color:var(--muted);font-family:'DM Sans',sans-serif">Less likely</td></tr>
+          <tr><td style="font-family:'DM Mono',monospace">"banana"</td><td>0.0</td><td style="color:var(--muted);font-family:'DM Sans',sans-serif">Least likely</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="icard">
+      <div class="icard-label">Temperature T — drag to change</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <input type="range" id="tSlider" min="0.1" max="3.0" step="0.1" value="1.0" style="flex:1">
+        <span id="tVal" style="font-size:1.3rem;font-weight:600;color:#0f1f3d;min-width:38px;text-align:right">1.0</span>
+      </div>
+      <div id="tDesc" style="font-size:0.82rem;color:var(--muted);margin-bottom:10px"></div>
+      <div class="t-quick">
+        <button id="btn05" onclick="setT(0.5)">T = 0.5 (slide)</button>
+        <button id="btn10" onclick="setT(1.0)" class="t-active">T = 1.0 (slide)</button>
+        <button id="btn20" onclick="setT(2.0)">T = 2.0 (slide)</button>
+      </div>
+    </div>
+
+    <div class="icard">
+      <div class="icard-label">Step-by-step calculation — exp(z / T) for each token</div>
+      <table class="calc-table">
+        <thead><tr><th>Token</th><th>z / T</th><th>exp(z/T)</th><th>Prob = exp / sum</th></tr></thead>
+        <tbody id="calcBody"></tbody>
+        <tfoot><tr><td>Sum</td><td>—</td><td id="sumExp"></td><td>1.0000</td></tr></tfoot>
+      </table>
+    </div>
+
+    <div class="icard">
+      <div class="icard-label">Probability distribution (visual)</div>
+      <div id="bars" style="margin-bottom:12px"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:0.5px solid var(--border)">
+        <div>
+          <div style="font-size:0.78rem;font-weight:600;color:#0f1f3d;margin-bottom:2px">Entropy H = −Σ p · ln(p)</div>
+          <div style="font-size:0.75rem;color:var(--muted)">Low H = confident · High H = uncertain / creative</div>
+        </div>
+        <span id="entropyPill" class="entropy-pill"></span>
+      </div>
+      <div id="tInsight" class="t-insight"></div>
+    </div>
+  </div>
+  <!-- end interactive -->
 
   <div class="diag">
     <div class="dlab">Flow diagram — how a token is chosen at each step</div>
@@ -762,14 +1013,705 @@ final = max(set(answers), key=answers.count)
           <td style="padding:10px 12px; color:#dc2626;">Many calls</td>
           <td style="padding:10px 12px; color:#64748b;">Yao et al. 2023</td>
         </tr>
-        <tr style="background:#f8fafc;">
+        <tr style="border-bottom:1px solid #e2e8f0; background:#f8fafc;">
           <td style="padding:10px 12px; font-weight:600;">ReAct</td>
           <td style="padding:10px 12px; color:#475569;">AI agents, multi-step tool use</td>
           <td style="padding:10px 12px; color:#dc2626;">N × calls</td>
           <td style="padding:10px 12px; color:#64748b;">Yao et al. 2023</td>
         </tr>
+        <tr>
+          <td style="padding:10px 12px; font-weight:600;">Meta Prompting</td>
+          <td style="padding:10px 12px; color:#475569;">Complex tasks, unknown best approach</td>
+          <td style="padding:10px 12px; color:#d97706;">2× calls</td>
+          <td style="padding:10px 12px; color:#64748b;">Zhang et al. 2023</td>
+        </tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CHAPTER 9 — META PROMPTING -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="ch" id="ch9">
+  <div class="ch-num">Chapter 9 — Technique #7 (Zhang, Yuan, Yao et al., 2023 · arXiv:2311.11482)</div>
+  <h2>Meta Prompting</h2>
+  <div class="ch-sub">Don't just ask the LLM your question. First ask it: <em>"What is the best way to answer this?"</em> — then use that strategy to get the answer.</div>
+
+  <div class="story">
+    <div class="slab">🧠 Story first</div>
+    <p>You have a very hard problem to solve — say, designing the menu for Dilli Bites. You could just start cooking randomly. Or you could first call an expert consultant and ask: <em>"What is the best framework for designing a street-food menu?"</em> The consultant gives you a structure — target audience → price tiers → bestseller anchor → seasonal items. Now you follow that structure to design the menu. You solved it better because you first asked <strong>how to think</strong>, before thinking. Meta Prompting is exactly this — the LLM first generates the optimal prompting strategy, then uses it to solve the actual problem.</p>
+  </div>
+
+  <!-- Flow Diagram -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.75rem;overflow-x:auto">
+    <div class="dlab">Flow diagram — meta prompting in two passes</div>
+    <svg viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="amp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="ampg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="ampp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#5b21b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- User question -->
+      <rect x="190" y="12" width="300" height="52" rx="8" fill="#dbeafe" stroke="#1e40af" stroke-width="0.75"/>
+      <text x="340" y="32" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#1e3a8a">User's hard question</text>
+      <text x="340" y="52" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#3b82f6">"Design an optimal menu pricing strategy"</text>
+      <line x1="340" y1="66" x2="340" y2="96" stroke="#475569" stroke-width="1.5" marker-end="url(#amp)"/>
+
+      <!-- PASS 1 label -->
+      <rect x="100" y="98" width="480" height="26" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="0.75"/>
+      <text x="340" y="113" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">Pass 1 — Meta Pass: Ask the LLM how to answer</text>
+      <line x1="340" y1="126" x2="340" y2="156" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#ampp)"/>
+
+      <!-- Meta prompt box -->
+      <rect x="90" y="158" width="500" height="70" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="0.75"/>
+      <text x="340" y="178" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">Meta Prompt sent to LLM:</text>
+      <text x="340" y="198" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#6d28d9">"You are an expert prompt engineer. What is the best prompting</text>
+      <text x="340" y="214" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#6d28d9">strategy and structure to answer: 'Design an optimal menu pricing strategy'?"</text>
+      <line x1="340" y1="230" x2="340" y2="260" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#ampp)"/>
+
+      <!-- LLM generates strategy -->
+      <rect x="130" y="262" width="420" height="80" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="0.75"/>
+      <text x="340" y="282" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">LLM generates optimal strategy:</text>
+      <text x="150" y="302" font-family="'DM Mono',monospace" font-size="9.5" fill="#5b21b6">1. Define target customer segment first</text>
+      <text x="150" y="318" font-family="'DM Mono',monospace" font-size="9.5" fill="#5b21b6">2. Anchor pricing with a bestseller   3. Use tiered pricing (budget/mid/premium)</text>
+      <text x="150" y="334" font-family="'DM Mono',monospace" font-size="9.5" fill="#5b21b6">4. Apply psychological pricing (₹99 vs ₹100)</text>
+      <line x1="340" y1="344" x2="340" y2="374" stroke="#475569" stroke-width="1.5" marker-end="url(#amp)"/>
+
+      <!-- PASS 2 label -->
+      <rect x="100" y="376" width="480" height="26" rx="6" fill="#ccfbf1" stroke="#0f766e" stroke-width="0.75"/>
+      <text x="340" y="391" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#064e3b">Pass 2 — Solve Pass: Apply the generated strategy to the actual problem</text>
+      <line x1="340" y1="404" x2="340" y2="432" stroke="#0f766e" stroke-width="1.5" marker-end="url(#ampg)"/>
+
+      <!-- Final answer -->
+      <rect x="130" y="434" width="420" height="40" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1"/>
+      <text x="340" y="450" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#064e3b">✅ Structured, expert-quality answer</text>
+      <text x="340" y="466" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#0f766e">Follows the 4-step framework the LLM designed for itself</text>
+    </svg>
+  </div>
+
+  <h3 class="sh">How it works under the hood</h3>
+  <p class="body">The paper (Zhang, Yuan, Yao, 2023) calls this a <strong>structure-oriented prompting framework</strong>. The core idea: for most hard problems, the biggest challenge is not solving the problem — it's figuring out the right structure to approach it. Meta Prompting separates these two concerns into two LLM calls.</p>
+
+  <div class="grid2">
+    <div class="mc" style="border-left:3px solid #7c3aed;border-radius:0 8px 8px 0">
+      <h4>Pass 1 — The Meta Pass</h4>
+      <p>You ask the LLM: "What is the best prompting strategy to answer X?" The LLM acts as an expert prompt engineer — it returns a structure, a framework, a step-by-step approach tailored to your task.</p>
+    </div>
+    <div class="mc" style="border-left:3px solid #0f766e;border-radius:0 8px 8px 0">
+      <h4>Pass 2 — The Solve Pass</h4>
+      <p>You inject the generated strategy back as a system prompt or prefix, then ask the actual question. The LLM now answers using its own designed framework — dramatically better than a naive prompt.</p>
+    </div>
+  </div>
+
+  <!-- Comparison diagram -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin:1.5rem 0;overflow-x:auto">
+    <div class="dlab">Comparison — naive prompting vs meta prompting</div>
+    <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ampc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <line x1="340" y1="10" x2="340" y2="210" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="170" y="22" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#dc2626">Naive Prompting</text>
+      <text x="510" y="22" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#16a34a">Meta Prompting</text>
+
+      <!-- Naive left -->
+      <rect x="20" y="34" width="295" height="42" rx="7" fill="#dbeafe" stroke="#1e40af" stroke-width="0.75"/>
+      <text x="167" y="57" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#1e3a8a">"Design a pricing strategy for my restaurant"</text>
+      <line x1="167" y1="78" x2="167" y2="108" stroke="#475569" stroke-width="1.5" marker-end="url(#ampc)"/>
+      <rect x="20" y="110" width="295" height="42" rx="7" fill="#fef3c7" stroke="#b45309" stroke-width="0.75"/>
+      <text x="167" y="133" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#78350f">LLM gives a generic, shallow answer</text>
+      <line x1="167" y1="154" x2="167" y2="184" stroke="#475569" stroke-width="1.5" marker-end="url(#ampc)"/>
+      <rect x="20" y="186" width="295" height="28" rx="7" fill="#ffe4e6" stroke="#9f1239" stroke-width="0.75"/>
+      <text x="167" y="201" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#881337">❌ "Consider your costs and competition..."</text>
+
+      <!-- Meta right -->
+      <rect x="365" y="34" width="295" height="42" rx="7" fill="#ede9fe" stroke="#5b21b6" stroke-width="0.75"/>
+      <text x="512" y="50" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">Pass 1: "What framework should I use?"</text>
+      <text x="512" y="68" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#7c3aed">→ LLM returns 4-step expert structure</text>
+      <line x1="512" y1="78" x2="512" y2="108" stroke="#475569" stroke-width="1.5" marker-end="url(#ampc)"/>
+      <rect x="365" y="110" width="295" height="42" rx="7" fill="#ccfbf1" stroke="#0f766e" stroke-width="0.75"/>
+      <text x="512" y="126" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#064e3b">Pass 2: Apply that structure to the question</text>
+      <text x="512" y="144" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#0f766e">→ LLM answers following its own framework</text>
+      <line x1="512" y1="154" x2="512" y2="184" stroke="#475569" stroke-width="1.5" marker-end="url(#ampc)"/>
+      <rect x="365" y="186" width="295" height="28" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="512" y="201" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" fill="#14532d">✅ Structured, expert, actionable answer</text>
+    </svg>
+  </div>
+
+  <h3 class="sh">Three flavors of Meta Prompting</h3>
+  <div class="grid2" style="grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
+    <div class="mc">
+      <h4>Self-Meta</h4>
+      <p>Ask the LLM to generate a prompt for itself: "What prompt would make you answer this best?" Then use that prompt.</p>
+    </div>
+    <div class="mc">
+      <h4>Decompose-Meta</h4>
+      <p>Ask the LLM to break a complex task into sub-tasks, each with its own prompt strategy. Solve sub-tasks, then combine.</p>
+    </div>
+    <div class="mc">
+      <h4>Persona-Meta</h4>
+      <p>Ask: "What type of expert should answer this and how?" LLM assigns itself a role + method, then answers in that persona.</p>
+    </div>
+  </div>
+
+  <div class="code"><span class="cm"># Meta Prompting — 2-pass pattern</span>
+
+<span class="cm"># ── Pass 1: Generate the best strategy ──</span>
+meta_prompt = <span class="str">"""
+You are an expert prompt engineer.
+
+Task: {user_question}
+
+What is the best step-by-step prompting strategy 
+and structure to answer this task accurately?
+Return ONLY the strategy, not the answer itself.
+"""</span>
+
+strategy = llm.generate(meta_prompt.format(
+    user_question=<span class="str">"Design an optimal menu pricing strategy"</span>
+))
+
+<span class="cm"># strategy = "1. Define target segment\n
+#             2. Anchor with bestseller\n
+#             3. Build price tiers\n
+#             4. Apply psychological pricing"</span>
+
+<span class="cm"># ── Pass 2: Apply the strategy to solve ──</span>
+solve_prompt = <span class="str">"""
+Use this framework to answer the question:
+
+Framework:
+{strategy}
+
+Question: {user_question}
+
+Answer step-by-step following the framework above.
+"""</span>
+
+final_answer = llm.generate(solve_prompt.format(
+    strategy=strategy,
+    user_question=<span class="str">"Design an optimal menu pricing strategy"</span>
+))
+
+<span class="cm"># Result: expert-quality, structured answer</span></div>
+
+  <h3 class="sh">When to use Meta Prompting</h3>
+  <div class="grid2">
+    <div class="mc" style="border-top:3px solid #16a34a;border-radius:8px 8px 0 0">
+      <h4>✅ Use it when</h4>
+      <p>Task is open-ended or complex. You don't know the best structure upfront. Domain is specialized (legal, medical, financial, system design). Quality matters more than speed.</p>
+    </div>
+    <div class="mc" style="border-top:3px solid #dc2626;border-radius:8px 8px 0 0">
+      <h4>❌ Skip it when</h4>
+      <p>Task is simple and well-defined ("translate this", "summarize in 3 points"). Speed is critical. Cost of 2 API calls matters. Zero-Shot or Few-Shot already works well.</p>
+    </div>
+  </div>
+
+  <div class="ins ins-p">
+    <div class="ilab">💡 Key insight</div>
+    <p>Meta Prompting is the AI equivalent of "measure twice, cut once." The first pass is cheap — you're not solving the problem yet, just planning the approach. But that plan dramatically improves the quality of the second pass. Think of it as giving the LLM a <strong>thinking scaffold before the thinking itself</strong>. This is also the intuition behind why senior engineers write design docs before writing code.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CHAPTER 10 — DSP -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="ch" id="ch10">
+  <div class="ch-num">Chapter 10 — Technique #8 (Li, Peng, He et al., NeurIPS 2023 · arXiv:2302.11520)</div>
+  <h2>Directional Stimulus Prompting (DSP)</h2>
+  <div class="ch-sub">A small trained model whispers keyword hints to a large frozen model — steering its output without ever touching its weights.</div>
+
+  <div class="story">
+    <div class="slab">🎙️ Story first</div>
+    <p>Imagine a brilliant but inflexible chef (ChatGPT). He's a genius but you can't change his recipes — he's set in his ways. Now you hire a smart assistant (a small Policy LM). The assistant reads the customer's order and whispers to the chef: <em>"The customer wants: spicy, quick, vegetarian."</em> Those whispered keywords — the <strong>stimulus</strong> — steer the chef's output perfectly, without retraining the chef at all. The assistant learns to whisper better hints over time using customer feedback (reward). That's DSP.</p>
+  </div>
+
+  <!-- Full flow diagram matching the slide -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.75rem;overflow-x:auto">
+    <div class="dlab">Flow diagram — DSP pipeline (matches the IIT KGP slide exactly)</div>
+    <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="dsp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="dspb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="dspr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="dspg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- ── Pseudo Label data (top centre) ── -->
+      <rect x="230" y="12" width="170" height="34" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="315" y="30" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#14532d">(Pseudo) Label Data</text>
+
+      <!-- Train with SFT label -->
+      <text x="220" y="78" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#475569">Train with SFT</text>
+      <line x1="315" y1="46" x2="270" y2="150" stroke="#475569" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#dsp)"/>
+
+      <!-- Train with RL label -->
+      <text x="490" y="36" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#475569">Train with RL</text>
+      <line x1="400" y1="26" x2="594" y2="26" stroke="#475569" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#dsp)"/>
+
+      <!-- ── Article (left) ── -->
+      <rect x="10" y="148" width="155" height="100" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.75"/>
+      <text x="87" y="166" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#0f1f3d">Article (Input)</text>
+      <text x="20" y="184" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#475569">(CNN) For the first time in</text>
+      <text x="20" y="197" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#475569">eight years, a TV legend</text>
+      <text x="20" y="210" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#475569">returned... Contestants told</text>
+      <text x="20" y="223" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#1e40af" text-decoration="underline">"The Price Is Right" …</text>
+      <text x="20" y="237" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#475569">April 1 edition …</text>
+
+      <!-- Arrow: Article → Policy LM -->
+      <line x1="167" y1="198" x2="207" y2="198" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dspb)"/>
+
+      <!-- ── Policy LM (T5) ── -->
+      <rect x="209" y="148" width="118" height="100" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+      <text x="268" y="172" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#78350f">Policy LM</text>
+      <text x="268" y="190" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#b45309">(e.g., T5)</text>
+      <!-- little robot face suggestion -->
+      <rect x="244" y="200" width="48" height="36" rx="5" fill="#fde68a" stroke="#b45309" stroke-width="0.75"/>
+      <circle cx="256" cy="213" r="4" fill="#78350f"/>
+      <circle cx="280" cy="213" r="4" fill="#78350f"/>
+      <path d="M256 224 Q268 232 280 224" fill="none" stroke="#78350f" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="268" y="246" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="8" fill="#92400e">small + tuneable</text>
+
+      <!-- Arrow: Policy LM → Stimulus -->
+      <line x1="329" y1="198" x2="367" y2="198" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dspb)"/>
+
+      <!-- ── Stimulus / Hints ── -->
+      <rect x="369" y="148" width="132" height="100" rx="8" fill="#eff6ff" stroke="#1e40af" stroke-width="0.75"/>
+      <text x="435" y="166" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1e3a8a">Stimulus (hints)</text>
+      <text x="380" y="184" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#1e40af">Keywords:</text>
+      <text x="380" y="198" font-family="'DM Sans',sans-serif" font-size="9" fill="#1d4ed8" text-decoration="underline">The Price Is Right;</text>
+      <text x="380" y="211" font-family="'DM Sans',sans-serif" font-size="9" fill="#1d4ed8" text-decoration="underline">Bob Barker;</text>
+      <text x="380" y="224" font-family="'DM Sans',sans-serif" font-size="9" fill="#1d4ed8" text-decoration="underline">2007;</text>
+      <text x="380" y="237" font-family="'DM Sans',sans-serif" font-size="9" fill="#1d4ed8" text-decoration="underline">91;</text>
+      <text x="380" y="245" font-family="'DM Sans',sans-serif" font-size="9" fill="#94a3b8">…</text>
+
+      <!-- Arrow: Stimulus → Black-box LLM -->
+      <line x1="503" y1="198" x2="543" y2="198" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dspb)"/>
+
+      <!-- ── Black-box LLM (ChatGPT) ── -->
+      <rect x="545" y="148" width="118" height="100" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+      <text x="604" y="170" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#312e81">Black-box LLM</text>
+      <text x="604" y="186" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#4338ca">(e.g., ChatGPT)</text>
+      <!-- black box visual -->
+      <rect x="579" y="196" width="50" height="40" rx="4" fill="#1e1b4b" stroke="#4338ca" stroke-width="0.75"/>
+      <text x="604" y="220" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="16" fill="#ffffff">?</text>
+      <text x="604" y="244" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="8" fill="#6366f1">frozen — not trainable</text>
+
+      <!-- Arrow: Article also goes to Black-box LLM (bottom arc) -->
+      <path d="M87 250 Q87 320 604 320 Q604 260 604 250" fill="none" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#dspb)"/>
+      <text x="340" y="340" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="#64748b">original article also passed to black-box LLM</text>
+
+      <!-- ── Reward (top right) ── -->
+      <rect x="594" y="12" width="78" height="34" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="633" y="22" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#14532d">Reward</text>
+      <text x="633" y="36" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="8" fill="#16a34a">48.39 ROUGE</text>
+
+      <!-- Arrow: Output → Reward -->
+      <line x1="633" y1="46" x2="633" y2="146" stroke="#b45309" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#dspr)"/>
+
+      <!-- ── Output summary (right, below reward) ── -->
+      <rect x="545" y="270" width="128" height="95" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="609" y="287" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-weight="600" fill="#14532d">Output (Summary)</text>
+      <text x="553" y="305" font-family="'DM Sans',sans-serif" font-size="8" fill="#475569">On April 1,</text>
+      <text x="553" y="317" font-family="'DM Sans',sans-serif" font-size="8" fill="#1e40af" text-decoration="underline">Bob Barker</text>
+      <text x="553" y="329" font-family="'DM Sans',sans-serif" font-size="8" fill="#475569">returned to the TV show</text>
+      <text x="553" y="341" font-family="'DM Sans',sans-serif" font-size="8" fill="#1e40af" text-decoration="underline">"The Price Is Right"</text>
+      <text x="553" y="353" font-family="'DM Sans',sans-serif" font-size="8" fill="#475569">after eight years…</text>
+
+      <!-- Arrow: LLM → Output -->
+      <line x1="604" y1="250" x2="604" y2="268" stroke="#0f766e" stroke-width="1.5" marker-end="url(#dspg)"/>
+    </svg>
+  </div>
+
+  <h3 class="sh">How it works under the hood — 3 components</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1.25rem">
+    <div class="mc" style="border-top:3px solid #b45309;border-radius:8px 8px 0 0">
+      <h4>1. Policy LM (small)</h4>
+      <p>A small, trainable model (T5, GPT-2 small). Its only job: read the input and generate keyword hints — the stimulus. It's small enough to fine-tune cheaply. It never sees the black-box LLM's internals.</p>
+    </div>
+    <div class="mc" style="border-top:3px solid #4338ca;border-radius:8px 8px 0 0">
+      <h4>2. Black-box LLM (frozen)</h4>
+      <p>A large powerful model (ChatGPT, GPT-4) you cannot retrain. It receives: original article + keyword hints from Policy LM. The hints steer it toward better outputs without touching its weights.</p>
+    </div>
+    <div class="mc" style="border-top:3px solid #16a34a;border-radius:8px 8px 0 0">
+      <h4>3. Reward signal</h4>
+      <p>The output quality is measured (ROUGE score for summarization, or human thumbs-up). This reward is fed back to train the Policy LM using RL — making its hints progressively better.</p>
+    </div>
+  </div>
+
+  <h3 class="sh">Two training phases</h3>
+  <div class="grid2" style="margin-bottom:1.25rem">
+    <div class="mc" style="border-left:3px solid #7c3aed;border-radius:0 8px 8px 0">
+      <h4>Phase 1 — SFT (Supervised Fine-Tuning)</h4>
+      <p>Use pseudo-label data: for each article, automatically extract candidate keywords (e.g., named entities). Train the Policy LM on these as ground-truth hints. This gives it a warm start.</p>
+    </div>
+    <div class="mc" style="border-left:3px solid #d97706;border-radius:0 8px 8px 0">
+      <h4>Phase 2 — RL (Reinforcement Learning)</h4>
+      <p>The Policy LM generates hints → Black-box LLM generates output → ROUGE score measured → score becomes the reward signal → Policy LM weights updated to generate better hints. Loop repeats.</p>
+    </div>
+  </div>
+
+  <!-- RL loop diagram -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.75rem;overflow-x:auto">
+    <div class="dlab">Flow diagram — RL training loop for the Policy LM</div>
+    <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="dspl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="dsprl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- 4 boxes in a row -->
+      <rect x="10"  y="55" width="138" height="52" rx="7" fill="#fef3c7" stroke="#b45309" stroke-width="0.75"/>
+      <text x="79"  y="75" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#78350f">Policy LM</text>
+      <text x="79"  y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#b45309">generates hints</text>
+
+      <line x1="150" y1="81" x2="178" y2="81" stroke="#475569" stroke-width="1.5" marker-end="url(#dspl)"/>
+
+      <rect x="180" y="55" width="138" height="52" rx="7" fill="#e0e7ff" stroke="#4338ca" stroke-width="0.75"/>
+      <text x="249" y="75" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#312e81">Black-box LLM</text>
+      <text x="249" y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#4338ca">generates output</text>
+
+      <line x1="320" y1="81" x2="348" y2="81" stroke="#475569" stroke-width="1.5" marker-end="url(#dspl)"/>
+
+      <rect x="350" y="55" width="138" height="52" rx="7" fill="#ede9fe" stroke="#5b21b6" stroke-width="0.75"/>
+      <text x="419" y="75" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#4c1d95">Reward</text>
+      <text x="419" y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#7c3aed">ROUGE / human score</text>
+
+      <line x1="490" y1="81" x2="518" y2="81" stroke="#475569" stroke-width="1.5" marker-end="url(#dspl)"/>
+
+      <rect x="520" y="55" width="148" height="52" rx="7" fill="#dcfce7" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="594" y="75" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#14532d">Update Policy LM</text>
+      <text x="594" y="93" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#16a34a">gradient step via RL</text>
+
+      <!-- Feedback loop arrow (bottom) -->
+      <path d="M594 109 Q594 148 79 148 Q79 109 79 109" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="6 3" marker-end="url(#dsprl)"/>
+      <text x="340" y="165" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="10" fill="#b45309">Policy LM learns to generate better and better hints over time</text>
+    </svg>
+  </div>
+
+  <h3 class="sh">The key trick — why this is powerful</h3>
+  <p class="body">Most prompting techniques assume you can't change the LLM. DSP agrees — but it trains a <strong>separate small model to become an expert hint-whisperer</strong>. This gives you the best of both worlds: the raw power of a large frozen model (ChatGPT) + the adaptability of a small fine-tuned model (Policy LM).</p>
+  <p class="body">In standard Few-Shot or CoT, you manually craft hints. In DSP, <strong>the hints are generated automatically and improved via reinforcement learning</strong>. The Policy LM gets rewarded when its hints lead to better summaries, and penalised when they don't — exactly like training a dog with treats.</p>
+
+  <div class="code"><span class="cm"># DSP — simplified pseudocode</span>
+
+<span class="cm"># ── Phase 1: SFT warm-start ──</span>
+<span class="kw">for</span> article, pseudo_keywords <span class="kw">in</span> pseudo_label_data:
+    hints = policy_lm.generate(article)
+    loss  = cross_entropy(hints, pseudo_keywords)
+    loss.backward()   <span class="cm"># standard supervised training</span>
+
+<span class="cm"># ── Phase 2: RL fine-tuning ──</span>
+<span class="kw">for</span> article <span class="kw">in</span> training_data:
+
+    <span class="cm"># Step 1: Policy LM generates keyword hints</span>
+    hints   = policy_lm.generate(article)          <span class="cm"># e.g. "Bob Barker; The Price Is Right; 91"</span>
+
+    <span class="cm"># Step 2: Build prompt for black-box LLM</span>
+    prompt  = f<span class="str">"""
+    Article: {article}
+    Keywords to focus on: {hints}
+    Write a concise summary:"""</span>
+
+    <span class="cm"># Step 3: Black-box LLM generates output (no gradients here)</span>
+    summary = blackbox_llm.generate(prompt)        <span class="cm"># frozen — ChatGPT, GPT-4 etc.</span>
+
+    <span class="cm"># Step 4: Compute reward</span>
+    reward  = rouge_score(summary, reference)      <span class="cm"># or human thumbs-up signal</span>
+
+    <span class="cm"># Step 5: Update Policy LM using RL (REINFORCE / PPO)</span>
+    rl_loss = -reward * log_prob(hints, policy_lm)
+    rl_loss.backward()    <span class="cm"># only Policy LM weights updated</span>
+
+<span class="cm"># ── Inference (no training needed) ──</span>
+hints   = policy_lm.generate(new_article)
+prompt  = build_prompt(new_article, hints)
+output  = blackbox_llm.generate(prompt)            <span class="cm"># ✅ steered by learned hints</span></div>
+
+  <h3 class="sh">DSP vs other techniques</h3>
+  <div class="grid2">
+    <div class="mc" style="border-top:3px solid #dc2626;border-radius:8px 8px 0 0">
+      <h4>All other techniques (Zero/Few/CoT)</h4>
+      <p>Hints are crafted manually by a human. One-size-fits-all. Static — they don't improve over time. Work at inference time only. No training involved.</p>
+    </div>
+    <div class="mc" style="border-top:3px solid #16a34a;border-radius:8px 8px 0 0">
+      <h4>DSP</h4>
+      <p>Hints are generated automatically by a trained Policy LM. Input-specific — different hints for every document. Improve via RL as feedback accumulates. Works even when the big LLM is completely locked (API-only).</p>
+    </div>
+  </div>
+
+  <div class="ins ins-r">
+    <div class="ilab">💡 Key insight</div>
+    <p>DSP solves a real industry problem: <strong>you can't fine-tune GPT-4</strong> (it's locked behind an API). But you <em>can</em> train a tiny model to generate better prompts for it. DSP essentially learns <em>how to talk to a black-box</em> — making it extremely practical for production AI systems where the underlying model is closed-source and inaccessible.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CHAPTER 11 — PROMPT CHAINING -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="ch" id="ch11">
+  <div class="ch-num">Chapter 11 — Architecture Pattern</div>
+  <h2>Prompt Chaining</h2>
+  <div class="ch-sub">Decompose one big task into a sequence of smaller, focused LLM calls. The output of each step feeds directly into the next.</div>
+
+  <div class="story">
+    <div class="slab">🏭 Story first</div>
+    <p>Think of a Dilli Bites kitchen. One person takes the order. Another makes the dough. Another stuffs the momos. Another steams them. Another plates them. No single person does everything — each person does one thing perfectly and passes it on. A single super-chef trying to do all steps simultaneously would be slower and make more mistakes. <strong>Prompt Chaining is the assembly-line pattern for LLMs</strong> — break the big task into specialist steps, and pipe the output of each step into the next.</p>
+  </div>
+
+  <!-- Main pipeline diagram -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.5rem;overflow-x:auto">
+    <div class="dlab">Flow diagram — prompt chaining pipeline (from the IIT KGP slide)</div>
+    <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="pca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Thought bubbles row -->
+      <!-- Initial task bubble -->
+      <ellipse cx="75" cy="38" rx="58" ry="24" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.75"/>
+      <text x="75" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">Initial</text>
+      <text x="75" y="47" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">task</text>
+      <circle cx="37" cy="65" r="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+      <circle cx="30" cy="75" r="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+
+      <!-- Intermediate result bubble -->
+      <ellipse cx="268" cy="38" rx="72" ry="24" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.75"/>
+      <text x="268" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">Intermediate</text>
+      <text x="268" y="47" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">result</text>
+      <circle cx="230" cy="65" r="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+      <circle cx="223" cy="75" r="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+
+      <!-- Refined result bubble -->
+      <ellipse cx="462" cy="38" rx="62" ry="24" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.75"/>
+      <text x="462" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">Refined</text>
+      <text x="462" y="47" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#475569">result</text>
+      <circle cx="424" cy="65" r="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+      <circle cx="417" cy="75" r="3" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.5"/>
+
+      <!-- Final result bubble -->
+      <ellipse cx="622" cy="38" rx="52" ry="24" fill="#dcfce7" stroke="#16a34a" stroke-width="0.75"/>
+      <text x="622" y="33" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#14532d">Final</text>
+      <text x="622" y="47" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" font-style="italic" fill="#14532d">result</text>
+      <circle cx="590" cy="65" r="4" fill="#dcfce7" stroke="#16a34a" stroke-width="0.5"/>
+      <circle cx="584" cy="75" r="3" fill="#dcfce7" stroke="#16a34a" stroke-width="0.5"/>
+
+      <!-- PROMPT A block -->
+      <rect x="14" y="82" width="120" height="60" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="74" y="106" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#1e3a8a">PROMPT A</text>
+      <text x="74" y="124" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="10" fill="#3b82f6">Initial task</text>
+
+      <!-- Chain link icon -->
+      <rect x="142" y="100" width="30" height="26" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="157" y="115" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="13" fill="#475569">⛓</text>
+
+      <!-- OUTPUT A + PROMPT B block -->
+      <rect x="178" y="82" width="164" height="60" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="260" y="101" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1d4ed8">OUTPUT A</text>
+      <line x1="178" y1="115" x2="342" y2="115" stroke="#1d4ed8" stroke-width="0.5" stroke-dasharray="3 2"/>
+      <text x="260" y="131" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1e3a8a">PROMPT B</text>
+
+      <!-- Chain link icon -->
+      <rect x="348" y="100" width="30" height="26" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="363" y="115" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="13" fill="#475569">⛓</text>
+
+      <!-- OUTPUT B + PROMPT C block -->
+      <rect x="384" y="82" width="164" height="60" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="466" y="101" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1d4ed8">OUTPUT B</text>
+      <line x1="384" y1="115" x2="548" y2="115" stroke="#1d4ed8" stroke-width="0.5" stroke-dasharray="3 2"/>
+      <text x="466" y="131" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1e3a8a">PROMPT C</text>
+
+      <!-- Chain link icon -->
+      <rect x="554" y="100" width="30" height="26" rx="5" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="569" y="115" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="13" fill="#475569">⛓</text>
+
+      <!-- FINAL OUTPUT block -->
+      <rect x="590" y="82" width="84" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="632" y="104" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#14532d">FINAL</text>
+      <text x="632" y="120" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#14532d">OUTPUT</text>
+      <text x="632" y="135" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="14" fill="#16a34a">★</text>
+
+      <!-- Arrows between blocks -->
+      <line x1="136" y1="112" x2="144" y2="112" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#pca)"/>
+      <line x1="344" y1="112" x2="352" y2="112" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#pca)"/>
+      <line x1="550" y1="112" x2="558" y2="112" stroke="#1d4ed8" stroke-width="1.5" marker-end="url(#pca)"/>
+
+      <!-- KEY RULE label -->
+      <rect x="14" y="162" width="650" height="30" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="0.75"/>
+      <text x="339" y="178" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#92400e">Key rule: output of each step = input of the next. Each LLM call does ONE focused job.</text>
+    </svg>
+  </div>
+
+  <!-- Real example diagram: customer reviews -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.25rem 1rem;margin-bottom:1.5rem;overflow-x:auto">
+    <div class="dlab">Real example from the slide — customer review analysis pipeline</div>
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="pce" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        <marker id="pceg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Customer reviews -->
+      <rect x="10" y="74" width="108" height="52" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="0.75"/>
+      <text x="64" y="91" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#334155">Customer</text>
+      <text x="64" y="107" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#334155">reviews</text>
+      <text x="64" y="120" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#64748b">(raw input)</text>
+
+      <!-- Arrow to parallel -->
+      <line x1="120" y1="100" x2="150" y2="100" stroke="#475569" stroke-width="1.5" marker-end="url(#pce)"/>
+
+      <!-- Fork: goes to both sentiment + key phrase -->
+      <line x1="165" y1="100" x2="165" y2="60" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="165" y1="100" x2="165" y2="140" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="152" y1="100" x2="152" y2="60" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="152" y1="100" x2="152" y2="140" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+
+      <!-- Sentiment Analysis -->
+      <rect x="170" y="28" width="148" height="64" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1"/>
+      <text x="244" y="52" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#7e22ce">Sentiment</text>
+      <text x="244" y="70" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#7e22ce">Analysis</text>
+      <text x="244" y="86" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#a855f7">LLM call #1</text>
+
+      <!-- Key phrase extraction -->
+      <rect x="170" y="108" width="148" height="64" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+      <text x="244" y="132" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#92400e">Key phrase</text>
+      <text x="244" y="150" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#92400e">extraction</text>
+      <text x="244" y="166" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#b45309">LLM call #2</text>
+
+      <!-- Arrows to Combine -->
+      <line x1="320" y1="60" x2="380" y2="95" stroke="#475569" stroke-width="1.5" marker-end="url(#pce)"/>
+      <line x1="320" y1="140" x2="380" y2="105" stroke="#475569" stroke-width="1.5" marker-end="url(#pce)"/>
+
+      <!-- Combine results -->
+      <rect x="383" y="74" width="118" height="52" rx="8" fill="#e0f2fe" stroke="#0369a1" stroke-width="0.75"/>
+      <text x="442" y="91" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#0c4a6e">Combine</text>
+      <text x="442" y="107" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#0c4a6e">results</text>
+      <text x="442" y="120" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#0369a1">LLM call #3</text>
+
+      <!-- Arrow to Summary -->
+      <line x1="503" y1="100" x2="533" y2="100" stroke="#0f766e" stroke-width="1.5" marker-end="url(#pceg)"/>
+
+      <!-- Summary generation -->
+      <rect x="535" y="74" width="132" height="52" rx="8" fill="#ccfbf1" stroke="#0f766e" stroke-width="1"/>
+      <text x="601" y="91" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#064e3b">Summary</text>
+      <text x="601" y="107" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#064e3b">generation</text>
+      <text x="601" y="120" text-anchor="middle" dominant-baseline="central" font-family="'DM Sans',sans-serif" font-size="9" fill="#0f766e">✅ Final output</text>
+
+      <!-- Step labels -->
+      <text x="64"  y="160" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#64748b">STEP 0</text>
+      <text x="244" y="14"  text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#7e22ce">STEP 1a</text>
+      <text x="244" y="196" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#b45309">STEP 1b</text>
+      <text x="442" y="14"  text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#0369a1">STEP 2</text>
+      <text x="601" y="14"  text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#0f766e">STEP 3</text>
+    </svg>
+  </div>
+
+  <h3 class="sh">How it works under the hood</h3>
+  <p class="body">Every time you call an LLM, it gets a fresh context window — it has no memory of previous calls. Prompt Chaining exploits this by <strong>passing outputs explicitly as inputs</strong>. Each call is a focused specialist. The chain is essentially a data pipeline where LLMs are the processing nodes.</p>
+  <p class="body">The critical insight is that a single "do everything" prompt forces the model to juggle too many concerns at once, increasing error. Breaking it into steps means each LLM call is simpler, its output is checkable, and errors in one step are catchable before they cascade to the next.</p>
+
+  <h3 class="sh">Two chain topologies</h3>
+  <div class="grid2" style="margin-bottom:1.25rem">
+    <div class="mc" style="border-left:3px solid #1d4ed8;border-radius:0 8px 8px 0">
+      <h4>Sequential chain (linear)</h4>
+      <p>Step 1 → Step 2 → Step 3. Output of each step feeds the next. Best for tasks where each step depends on the previous result. Example: translate → summarise → format as JSON.</p>
+    </div>
+    <div class="mc" style="border-left:3px solid #7c3aed;border-radius:0 8px 8px 0">
+      <h4>Parallel + merge chain</h4>
+      <p>Multiple LLM calls run on the same input simultaneously (sentiment + key phrases). Then a final step merges all results. Faster and more thorough. Example: the customer review pipeline above.</p>
+    </div>
+  </div>
+
+  <div class="code"><span class="cm"># Prompt Chaining — Dilli Bites review analysis</span>
+
+reviews = <span class="str">"""
+Review 1: "Momos were amazing but delivery was slow!"
+Review 2: "Best garlic bread in Delhi, worth the price."
+Review 3: "Staff was rude, but the choco lava was great."
+"""</span>
+
+<span class="cm"># ── Step 1a: Sentiment Analysis (LLM call #1) ──</span>
+sentiment_prompt = <span class="str">f"""
+Classify each review as Positive / Negative / Mixed.
+Return JSON only. Reviews: {reviews}
+"""</span>
+sentiments = llm.generate(sentiment_prompt)
+<span class="cm"># {"r1": "Mixed", "r2": "Positive", "r3": "Mixed"}</span>
+
+<span class="cm"># ── Step 1b: Key phrase extraction (LLM call #2) ──</span>
+phrase_prompt = <span class="str">f"""
+Extract the top 5 key product/service mentions from:
+{reviews}
+Return a plain list.
+"""</span>
+key_phrases = llm.generate(phrase_prompt)
+<span class="cm"># ["momos", "delivery", "garlic bread", "staff", "choco lava"]</span>
+
+<span class="cm"># ── Step 2: Combine results (LLM call #3) ──</span>
+combine_prompt = <span class="str">f"""
+Sentiments: {sentiments}
+Key phrases: {key_phrases}
+
+Summarise the overall customer experience in 3 bullet points.
+"""</span>
+combined = llm.generate(combine_prompt)
+
+<span class="cm"># ── Step 3: Final formatting (LLM call #4) ──</span>
+final_prompt = <span class="str">f"""
+Format this summary as a professional business report section:
+{combined}
+"""</span>
+final_output = llm.generate(final_prompt)
+<span class="cm"># ✅ Polished, structured, accurate report</span></div>
+
+  <h3 class="sh">When to use prompt chaining</h3>
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="mc" style="border-top:3px solid #16a34a;border-radius:8px 8px 0 0">
+      <h4>✅ Use it when</h4>
+      <p>Task has clean sequential subtasks. Each step's output is verifiable. You want intermediate checkpoints. Task is too complex for a single prompt. Latency budget allows multiple calls.</p>
+    </div>
+    <div class="mc" style="border-top:3px solid #dc2626;border-radius:8px 8px 0 0">
+      <h4>❌ Skip it when</h4>
+      <p>Task is simple enough for one prompt. Low latency is critical (each chain step adds delay). Steps are not clearly separable. You're paying per API call and budget is tight.</p>
+    </div>
+  </div>
+
+  <div class="ins ins-b">
+    <div class="ilab">💡 Key insight</div>
+    <p>Prompt Chaining is the <strong>most used architectural pattern in production AI systems</strong>. Every serious AI product — Cursor, Perplexity, Claude — uses chaining under the hood. It improves accuracy, traceability, and control. Think of it as the <em>Unix pipe philosophy applied to LLMs</em>: small tools, each doing one thing well, chained together to build powerful workflows. Your Dilli Bites AI assistant and your LiveKit teaching platform are both prompt chains.</p>
   </div>
 </section>
 
@@ -780,7 +1722,7 @@ function scrollTo(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 
-const secs = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8'];
+const secs = ['ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','ch10','ch11'];
 const btns = document.querySelectorAll('.nb');
 
 const obs = new IntersectionObserver(entries => {
@@ -793,6 +1735,102 @@ const obs = new IntersectionObserver(entries => {
 }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
 
 secs.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
+
+/* ── Temperature Calculator Logic ── */
+(function() {
+  const logits = [4.0, 2.0, 1.0, 0.0];
+  const tokens = ['"cat"', '"dog"', '"fish"', '"banana"'];
+  const colors = ['#2563eb', '#7c3aed', '#0f766e', '#b45309'];
+
+  function compute(T) {
+    const exp = logits.map(z => Math.exp(z / T));
+    const sum = exp.reduce((a, b) => a + b, 0);
+    const probs = exp.map(e => e / sum);
+    const entropy = -probs.reduce((acc, p) => acc + (p > 1e-12 ? p * Math.log(p) : 0), 0);
+    return { exp, sum, probs, entropy };
+  }
+
+  function render(T) {
+    const { exp, sum, probs, entropy } = compute(T);
+
+    /* description */
+    const desc = T <= 0.3 ? 'Extremely low — near-deterministic. Always picks "cat".'
+      : T <= 0.6 ? 'Low — very confident. Strong peak on top token. Great for coding & math.'
+      : T <= 1.1 ? 'Standard — natural distribution. Default for most APIs.'
+      : T <= 1.8 ? 'High — creative. Lower-ranked tokens get more chances.'
+      : 'Very high — chaotic. Nearly uniform. Outputs become unpredictable.';
+    document.getElementById('tDesc').textContent = desc;
+
+    /* calc table */
+    const tbody = document.getElementById('calcBody');
+    tbody.innerHTML = '';
+    tokens.forEach((tok, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td style="font-family:'DM Mono',monospace">${tok}</td>
+        <td>${(logits[i]/T).toFixed(3)}</td>
+        <td>${exp[i].toFixed(3)}</td>
+        <td style="font-weight:600">${probs[i].toFixed(4)}</td>`;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('sumExp').textContent = sum.toFixed(3);
+
+    /* bars */
+    const barsEl = document.getElementById('bars');
+    barsEl.innerHTML = '';
+    tokens.forEach((tok, i) => {
+      const pct = (probs[i] * 100).toFixed(1);
+      barsEl.innerHTML += `<div class="bar-wrap">
+        <div class="bar-tok">${tok}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${pct}%;background:${colors[i]}">
+            <span>${pct}%</span>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    /* entropy pill */
+    const pill = document.getElementById('entropyPill');
+    const h = entropy.toFixed(3);
+    let bg, col;
+    if (entropy < 0.3)      { bg='#dcfce7'; col='#166534'; }
+    else if (entropy < 0.8) { bg='#fef3c7'; col='#92400e'; }
+    else                    { bg='#fee2e2'; col='#991b1b'; }
+    pill.style.background = bg; pill.style.color = col;
+    pill.textContent = 'H = ' + h;
+
+    /* insight */
+    const ins = document.getElementById('tInsight');
+    if (T <= 0.5)
+      ins.textContent = '📌 Slide example T=0.5: "cat" gets 97.9% — the model is near-certain. Entropy = 0.110 (very low). Use this for factual Q&A, code, math.';
+    else if (T <= 1.0)
+      ins.textContent = '📌 Slide example T=1.0: natural softmax — cat=83.1%, dog=11.2%, fish=4.1%, banana=1.5%. Entropy = 0.594. This is the default in most APIs.';
+    else if (T <= 2.0)
+      ins.textContent = '📌 Slide example T=2.0: probabilities flatten — cat drops to 57.9%, banana jumps to 7.8%. Entropy = 1.109 (high). Good for creative writing. Risky for facts.';
+    else
+      ins.textContent = '⚠️ Very high temperature — the distribution approaches uniform. All tokens become nearly equally likely. Model loses coherence. Avoid for structured tasks.';
+
+    /* quick-button highlight */
+    ['btn05','btn10','btn20'].forEach(id => document.getElementById(id).classList.remove('t-active'));
+    if (Math.abs(T - 0.5) < 0.05) document.getElementById('btn05').classList.add('t-active');
+    else if (Math.abs(T - 1.0) < 0.05) document.getElementById('btn10').classList.add('t-active');
+    else if (Math.abs(T - 2.0) < 0.05) document.getElementById('btn20').classList.add('t-active');
+  }
+
+  window.setT = function(v) {
+    document.getElementById('tSlider').value = v;
+    document.getElementById('tVal').textContent = parseFloat(v).toFixed(1);
+    render(v);
+  };
+
+  document.getElementById('tSlider').addEventListener('input', function() {
+    const v = parseFloat(this.value);
+    document.getElementById('tVal').textContent = v.toFixed(1);
+    render(v);
+  });
+
+  render(1.0);
+})();
 </script>
 </body>
 </html>
